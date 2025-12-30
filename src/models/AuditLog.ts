@@ -1,7 +1,7 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
 
 export interface IAuditLog extends Document {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   userId: mongoose.Types.ObjectId;
   saccoId?: mongoose.Types.ObjectId;
   action: string;

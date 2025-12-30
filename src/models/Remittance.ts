@@ -1,7 +1,7 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
 
 export interface IRemittance extends Document {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   vehicleId: mongoose.Types.ObjectId;
   ownerId: mongoose.Types.ObjectId;
   period: {

@@ -1,7 +1,7 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
 
 export interface IMaintenanceRecord extends Document {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   vehicleId: mongoose.Types.ObjectId;
   type: 'scheduled' | 'repair' | 'breakdown';
   description: string;

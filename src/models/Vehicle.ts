@@ -1,11 +1,11 @@
-import mongoose, { Schema, Model, Document } from 'mongoose';
+import mongoose, { Schema, Model as MongooseModel, Document } from 'mongoose';
 
 export interface IVehicle extends Document {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   saccoId: mongoose.Types.ObjectId;
   registrationNumber: string;
   make: string;
-  model: string;
+  vehicleModel: string;
   year: number;
   capacity: number;
   ownerId: mongoose.Types.ObjectId;
@@ -37,7 +37,7 @@ const VehicleSchema = new Schema<IVehicle>(
       required: [true, 'Make is required'],
       trim: true,
     },
-    model: {
+    vehicleModel: {
       type: String,
       required: [true, 'Model is required'],
       trim: true,
@@ -92,6 +92,6 @@ VehicleSchema.index({ registrationNumber: 1 });
 VehicleSchema.index({ ownerId: 1 });
 VehicleSchema.index({ driverIds: 1 });
 
-const Vehicle: Model<IVehicle> = mongoose.models.Vehicle || mongoose.model<IVehicle>('Vehicle', VehicleSchema);
+const Vehicle: MongooseModel<IVehicle> = mongoose.models.Vehicle || mongoose.model<IVehicle>('Vehicle', VehicleSchema);
 
 export default Vehicle;

@@ -1,7 +1,7 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
 
 export interface ISacco extends Document {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   name: string;
   registrationNumber: string;
   location: string;

@@ -1,14 +1,12 @@
-import { FilterQuery } from 'mongoose';
-
 /**
  * Adds SACCO filtering to a MongoDB query for multi-tenant data isolation
  * Super admins can see all data, other users only see their SACCO's data
  */
 export function addSaccoFilter<T>(
-  baseFilter: FilterQuery<T>,
+  baseFilter: Record<string, any>,
   userRole: string,
   userSaccoId: string | null
-): FilterQuery<T> {
+): Record<string, any> {
   // Super admin sees everything
   if (userRole === 'superadmin') {
     return baseFilter;
@@ -18,7 +16,7 @@ export function addSaccoFilter<T>(
   return {
     ...baseFilter,
     saccoId: userSaccoId,
-  } as FilterQuery<T>;
+  };
 }
 
 /**
@@ -26,11 +24,11 @@ export function addSaccoFilter<T>(
  * Owners can only see their own vehicles
  */
 export function addOwnershipFilter<T>(
-  baseFilter: FilterQuery<T>,
+  baseFilter: Record<string, any>,
   userRole: string,
   userId: string,
   userSaccoId: string | null
-): FilterQuery<T> {
+): Record<string, any> {
   // Super admin sees everything
   if (userRole === 'superadmin') {
     return baseFilter;
@@ -41,7 +39,7 @@ export function addOwnershipFilter<T>(
     return {
       ...baseFilter,
       saccoId: userSaccoId,
-    } as FilterQuery<T>;
+    };
   }
 
   // Owners only see their own vehicles
@@ -49,7 +47,7 @@ export function addOwnershipFilter<T>(
     return {
       ...baseFilter,
       ownerId: userId,
-    } as FilterQuery<T>;
+    };
   }
 
   // Drivers see vehicles they're assigned to
@@ -57,7 +55,7 @@ export function addOwnershipFilter<T>(
     return {
       ...baseFilter,
       driverIds: userId,
-    } as FilterQuery<T>;
+    };
   }
 
   return baseFilter;

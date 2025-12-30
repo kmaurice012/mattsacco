@@ -10,7 +10,7 @@ import { createAuditLog } from '@/lib/audit';
 // GET /api/saccos/[id] - Get single SACCO
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser();
@@ -21,7 +21,8 @@ export async function GET(
 
     await dbConnect();
 
-    const sacco = await Sacco.findById(params.id).populate('adminId', 'name email phone');
+    const { id } = await params;
+    const sacco = await Sacco.findById(id).populate('adminId', 'name email phone');
 
     if (!sacco) {
       return NextResponse.json({ error: 'SACCO not found' }, { status: 404 });
@@ -52,7 +53,7 @@ export async function GET(
 // PUT /api/saccos/[id] - Update SACCO (super admin or sacco admin)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser();
@@ -65,7 +66,8 @@ export async function PUT(
 
     await dbConnect();
 
-    const sacco = await Sacco.findById(params.id);
+    const { id } = await params;
+    const sacco = await Sacco.findById(id);
 
     if (!sacco) {
       return NextResponse.json({ error: 'SACCO not found' }, { status: 404 });
@@ -73,7 +75,7 @@ export async function PUT(
 
     // Check permissions
     const canModify = user.role === 'superadmin' ||
-                      (user.role === 'admin' && user.saccoId === params.id);
+                      (user.role === 'admin' && user.saccoId === id);
 
     if (!canModify) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
@@ -138,7 +140,7 @@ export async function PUT(
 // DELETE /api/saccos/[id] - Delete SACCO (super admin only)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser();
@@ -149,7 +151,8 @@ export async function DELETE(
 
     await dbConnect();
 
-    const sacco = await Sacco.findById(params.id);
+    const { id } = await params;
+    const sacco = await Sacco.findById(id);
 
     if (!sacco) {
       return NextResponse.json({ error: 'SACCO not found' }, { status: 404 });

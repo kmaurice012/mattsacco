@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth-config';
 import dbConnect from '@/lib/mongodb';
 import Vehicle from '@/models/Vehicle';
 import Trip from '@/models/Trip';

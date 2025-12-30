@@ -1,7 +1,7 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
 
 export interface ISystemSettings extends Document {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   platformCommission: number;
   maintenanceMode: boolean;
   allowedFileTypes: string[];

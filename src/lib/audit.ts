@@ -20,7 +20,7 @@ export async function createAuditLog(params: AuditLogParams) {
 
     const auditLog = await AuditLog.create({
       userId: params.userId,
-      saccoId: params.saccoId || null,
+      saccoId: params.saccoId || undefined,
       action: params.action,
       entityType: params.entityType,
       entityId: params.entityId,

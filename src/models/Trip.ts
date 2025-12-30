@@ -1,7 +1,7 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
 
 export interface ITrip extends Document {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   vehicleId: mongoose.Types.ObjectId;
   driverId: mongoose.Types.ObjectId;
   conductorId?: mongoose.Types.ObjectId;

@@ -1,7 +1,7 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
 
 export interface ISaccoSettings extends Document {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   saccoId: mongoose.Types.ObjectId;
   commissionRate: number;
   driverDailyWage: number;

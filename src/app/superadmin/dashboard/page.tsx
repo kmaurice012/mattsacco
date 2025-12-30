@@ -95,19 +95,16 @@ export default function SuperAdminDashboard() {
           title="Total SACCOs"
           value={stats?.totalSaccos || 0}
           icon={<Building2 className="h-6 w-6 text-blue-600" />}
-          subtitle={`${stats?.activeSaccos || 0} active`}
         />
         <StatCard
           title="Total Vehicles"
           value={stats?.totalVehicles || 0}
           icon={<Car className="h-6 w-6 text-green-600" />}
-          subtitle="Across all SACCOs"
         />
         <StatCard
           title="Total Users"
           value={stats?.totalUsers || 0}
           icon={<Users className="h-6 w-6 text-purple-600" />}
-          subtitle={`${stats?.activeUsers || 0} active`}
         />
         <StatCard
           title="Daily Collections"

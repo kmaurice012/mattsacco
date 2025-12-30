@@ -59,7 +59,7 @@ const vehicleSchema = new mongoose.Schema({
   saccoId: { type: mongoose.Schema.Types.ObjectId, ref: 'Sacco', required: true },
   registrationNumber: { type: String, required: true, unique: true },
   make: { type: String, required: true },
-  model: { type: String, required: true },
+  vehicleModel: { type: String, required: true },
   year: { type: Number, required: true },
   capacity: { type: Number, required: true },
   ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },

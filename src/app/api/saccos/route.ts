@@ -99,7 +99,6 @@ export async function POST(request: NextRequest) {
       commissionRate: commissionRate || 10,
       subscriptionPlan: subscriptionPlan || 'basic',
       subscriptionExpiry: subscriptionExpiry || new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year from now
-      adminId: null, // Temporary, will update after creating admin user
     });
 
     // Create admin user
@@ -114,7 +113,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Update SACCO with admin ID
-    sacco.adminId = admin._id;
+    sacco.adminId = admin._id as any;
     await sacco.save();
 
     // Create default settings for the SACCO

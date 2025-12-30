@@ -230,7 +230,7 @@ async function seed() {
           saccoId: sacco._id,
           registrationNumber: `K${String.fromCharCode(65 + Math.floor(Math.random() * 3))}${String.fromCharCode(65 + Math.floor(Math.random() * 3))} ${Math.floor(100 + Math.random() * 900)}${String.fromCharCode(65 + Math.floor(Math.random() * 26))}`,
           make,
-          model,
+          vehicleModel: model,
           year: 2018 + Math.floor(Math.random() * 6),
           capacity: 14,
           ownerId: owner._id,
